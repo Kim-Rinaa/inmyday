@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INMYDAY — Soft light, clear line</title>
+  <meta name="description" content="커튼 사이로 빛이 드는 오후, 나에게 꼭 맞는 하루의 실루엣. 2030 여성 데일리웨어 인마이데이.">
+
+  <!-- 서체: 제목 세리프 / 영문 라벨 / 국문 본문 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
+  <!-- 기본 레이아웃 → 그 위에 무드 테마 (순서 중요) -->
+  <link rel="stylesheet" href="css/portfolio.css">
+  <script src="js/products.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="header__nav">
+      <a href="#">Shop</a>
+      <a href="#">Lookbook</a>
+      <a href="#">Our Day</a>
+    </nav>
+    <!-- 로고 완성 전까지 텍스트로 유지 → 완성 후 <img>로 교체 -->
+    <a href="#" class="header__logo">INMYDAY</a>
+    <div class="header__util">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Bag (0)</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SLIDER : 사진 3장 페이드 + 타임라인 -->
+    <section class="visual visual--light hero">
+      <div class="hero__slides">
+
+        <!-- Slide 1 -->
+        <div class="hero__slide is-active">
+          <a href="#">
+            <picture>
+              <source media="(max-width: 768px)"
+                srcset="https://images.pexels.com/photos/30337241/pexels-photo-30337241.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1920&fit=crop">
+              <img
+                src="https://images.pexels.com/photos/30337241/pexels-photo-30337241.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&fit=crop"
+                alt="햇살이 드는 방, 시어 커튼 뒤에 선 여성의 실루엣">
+            </picture>
+          </a>
+          <div class="caption">
+            <span>New In</span>
+            <em class="caption__sub">Soft light, clear line</em>
+            <a class="caption__more" href="#">View more</a>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero__slide is-active" data-theme="dark">
+          <a href="#">
+            <picture>
+              <source media="(max-width: 768px)"
+                srcset="https://images.pexels.com/photos/16260994/pexels-photo-16260994.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1920&fit=crop">
+              <img
+                src="https://images.pexels.com/photos/16260994/pexels-photo-16260994.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&fit=crop"
+                alt="시어 커튼을 통과해 벽에 닿는 햇살">
+            </picture>
+          </a>
+          <div class="caption">
+            <span>Best</span>
+            <em class="caption__sub">매일 다시 꺼내 입는 옷</em>
+            <a class="caption__more" href="#">View more</a>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero__slide is-active" data-theme="dark">
+          <a href="#">
+            <picture>
+              <source media="(max-width: 768px)"
+                srcset="https://images.pexels.com/photos/13580662/pexels-photo-13580662.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1920&fit=crop">
+              <img
+                src="https://images.pexels.com/photos/13580662/pexels-photo-13580662.jpeg?auto=compress&cs=tinysrgb&w=2560&h=1440&fit=crop"
+                alt="흰 커튼 위에 드리운 빛과 그림자">
+            </picture>
+          </a>
+          <div class="caption">
+            <span>Our Day</span>
+            <em class="caption__sub">나의 하루에 자연스럽게</em>
+            <a class="caption__more" href="#">Our Story</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 타임라인: 클릭하면 해당 사진으로 이동 -->
+      <div class="hero__timeline">
+        <button class="hero__bar is-active" type="button" aria-label="1번 이미지 보기"><span></span></button>
+        <button class="hero__bar" type="button" aria-label="2번 이미지 보기"><span></span></button>
+        <button class="hero__bar" type="button" aria-label="3번 이미지 보기"><span></span></button>
+      </div>
+    </section>
+
+    <!-- 2. FEATURED LOOK : 왼쪽 상반신 라인 / 오른쪽 쇄골 클로즈업 -->
+    <section class="split">
+      <a href="#" class="split__item">
+        <img src="https://picsum.photos/seed/coat1/900/1200" alt="어깨 라인이 드러나는 오프숄더 니트">
+        <div class="caption">
+          <span>The Shoulder Line</span>
+          <em class="caption__sub">어깨에 머무는 빛처럼</em>
+        </div>
+      </a>
+      <a href="#" class="split__item">
+        <img src="https://picsum.photos/seed/coat2/900/1200" alt="쇄골 라인 클로즈업">
+      </a>
+    </section>
+
+    <!-- 3. LOOKBOOK : 시즌 캠페인 컷 -->
+    <section class="visual">
+      <a href="#"><img src="https://picsum.photos/seed/look26/1800/1100" alt="2026 가을 룩북"></a>
+      <div class="caption">
+        <span>2026 Autumn</span>
+        <em class="caption__sub">Afternoon Light</em>
+        <a class="caption__more" href="#">Lookbook</a>
+      </div>
+    </section>
+
+    <!-- 4. DAILY TOPS
+         data-category는 products.js 값과 연결돼 있어서 일단 그대로 둠.
+         products.js에서 'knit' → 'top'으로 바꾸면 여기도 같이 변경 -->
+    <section class="collection">
+      <p class="section-label reveal">Collection 01</p>
+      <h2 class="section-title reveal">Daily Tops</h2>
+      <p class="section-desc reveal">꾸미지 않아도 완성되는 라인</p>
+      <div class="grid" data-category="knit"></div>
+      <div class="divider"></div>
+    </section>
+
+    <!-- 5. FLARE LINE : 데님은 색이 아닌 실루엣으로 -->
+    <section class="visual visual--spaced">
+      <a href="#"><img src="https://picsum.photos/seed/denim9/1800/1100" alt="아래로 퍼지는 플레어 데님 실루엣"></a>
+      <div class="caption">
+        <span>Flare Line</span>
+        <em class="caption__sub">발끝까지 이어지는 하루</em>
+        <a class="caption__more" href="#">View more</a>
+      </div>
+    </section>
+    <section class="collection">
+      <div class="grid grid--col3 grid--spaced" data-category="denim"></div>
+      <div class="divider"></div>
+    </section>
+
+    <!-- 6. EVERYDAY LAYER
+         products.js에서 'bag' → 'layer'로 바꾸면 여기도 같이 변경 -->
+    <section class="visual visual--spaced">
+      <a href="#"><img src="https://picsum.photos/seed/bag77/1800/1100" alt="가디건과 셔츠 레이어드 룩"></a>
+      <div class="caption caption--right">
+        <span>Everyday Layer</span>
+        <em class="caption__sub">오후 세 시의 데일리</em>
+        <a class="caption__more" href="#">View more</a>
+      </div>
+    </section>
+    <section class="collection">
+      <div class="grid grid--col3 grid--spaced" data-category="bag"></div>
+    </section>
+
+    <!-- 7. BRAND STORY : 매장 대신 촬영 공간(커튼, 창가) -->
+    <section class="visual">
+      <img src="https://picsum.photos/seed/store3/1800/1200?grayscale" alt="햇살이 드는 인마이데이 촬영 공간">
+      <div class="caption caption--center">
+        <span>In My Day</span>
+        <em class="caption__sub">나의 하루에 자연스럽게 머무는 옷</em>
+        <a class="caption__more" href="#">Our Story</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="accordion">
+      <details>
+        <summary>Customer Care</summary>
+        <div class="accordion__body">Mon–Fri 10:00–17:00 · Lunch 12:00–13:00<br>help@inmyday.co.kr</div>
+      </details>
+      <details>
+        <summary>Shipping &amp; Returns</summary>
+        <div class="accordion__body">배송·교환·반품 안내 문구</div>
+      </details>
+      <details>
+        <summary>Smart Store</summary>
+        <div class="accordion__body">네이버 스마트스토어에서도 만나보실 수 있어요.</div>
+      </details>
+      <details>
+        <summary>Instagram</summary>
+        <div class="accordion__body">@inmyday</div>
+      </details>
+    </div>
+    <p class="footer__copy">© 2026 INMYDAY. Practice project — not for commercial use.</p>
+  </footer>
+
+</body>
+
+</html>

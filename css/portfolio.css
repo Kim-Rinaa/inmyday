@@ -1,0 +1,711 @@
+/* =========================================
+   1. INMYDAY · Soft light, clear line
+   브랜드 톤은 여기서만 수정
+   ========================================= */
+:root {
+  /* 컬러: 옷이 아닌 공간·빛·사람에서 온 색 */
+  --color-bg: #F4F1EC;
+  /* Curtain White · 커튼을 통과한 빛 */
+  --color-bg-soft: #EDE6DA;
+  /* Sunlit Ivory · 커튼에 닿은 햇살 */
+  --color-line: #D9D6D1;
+  /* Wall Gray · 스튜디오 벽 */
+  --color-placeholder: #E3E0DB;
+  /* 이미지 로딩 전 자리 */
+  --color-sub: #A8A19A;
+  /* Shadow Greige · 커튼 주름 그림자 */
+  --color-ink: #2A2522;
+  /* Hair Espresso · 머리카락 */
+  --color-point: #CDB4A0;
+  /* Skin Nude · 쇄골 (아주 작게만) */
+
+  /* 서체: 제목 세리프 / 영문 라벨 / 국문 본문 */
+  --font-title: 'Cormorant Garamond', serif;
+  --font-base: 'Jost', 'Pretendard', sans-serif;
+  /* 영문은 Jost, 한글은 Pretendard로 자동 */
+  --font-ko: 'Pretendard', sans-serif;
+
+  --fs-xxs: 9px;
+  --fs-xs: 10px;
+  --fs-s: 11px;
+  --fs-body: 13px;
+  --fs-logo: 30px;
+  --letter: 0.02em;
+  /* 한글이 벌어지지 않게 기본 자간은 좁게 */
+  --letter-label: 0.24em;
+  /* 영문 대문자 라벨만 넓게 */
+
+  --gap: clamp(14px, 2.2vw, 28px);
+  --header-h: 72px;
+  --space-section: 120px;
+  --ease: cubic-bezier(.25, .1, .25, 1);
+  /* 빛이 스미듯 부드럽게 */
+  --slow: .8s;
+
+  /* 오후 햇살 톤: 채도 살짝 낮추고 따뜻하게 */
+  --photo-tone: saturate(.88) sepia(.06) contrast(.96);
+}
+
+/* =========================================
+   2. RESET & BASE
+   ========================================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-s);
+  font-weight: 300;
+  letter-spacing: var(--letter);
+  line-height: 1.7;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--slow) var(--ease), color var(--slow) var(--ease);
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+::selection {
+  background: var(--color-point);
+  color: var(--color-bg);
+}
+
+/* =========================================
+   3. HEADER
+   처음: 투명 배경 + 밝은 글자 (히어로 이미지 위)
+   스크롤: 화이트 배경 + 에스프레소 글자
+   ========================================= */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  padding: 0 var(--gap);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  text-transform: uppercase;
+
+  /* 처음 화면 */
+  color: var(--color-bg);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background-color var(--slow) var(--ease),
+    color var(--slow) var(--ease),
+    border-color var(--slow) var(--ease),
+    backdrop-filter var(--slow) var(--ease);
+}
+
+/* 스크롤 후 */
+.header.is-scrolled {
+  color: var(--color-ink);
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--color-line);
+}
+
+.header__nav,
+.header__util {
+  display: flex;
+  gap: 28px;
+}
+
+.header__util {
+  justify-content: flex-end;
+}
+
+.header__nav a,
+.header__util a {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--letter-label);
+}
+
+/* 호버는 색 대신 투명도로: 이미지 위에서도, 화이트 위에서도 자연스럽게 */
+.header__nav a:hover,
+.header__util a:hover,
+.header__logo:hover {
+  opacity: .55;
+}
+
+.header__logo {
+  font-family: var(--font-title);
+  font-size: var(--fs-logo);
+  font-weight: 300;
+  letter-spacing: 0.26em;
+  line-height: 1;
+}
+
+/* 처음 화면 헤더도 에스프레소로 */
+.header:not(.is-scrolled) {
+  color: var(--color-ink);
+}
+
+/* 어두운 히어로 사진 위: 커튼 화이트 글자 (스크롤 전에만) */
+.header.is-on-dark:not(.is-scrolled) {
+  color: var(--color-bg);
+}
+
+
+/* =========================================
+   4. VISUAL (풀스크린 이미지 섹션)
+   ========================================= */
+.visual {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-placeholder);
+}
+
+.visual>a {
+  display: block;
+  height: 100%;
+}
+
+.visual--spaced {
+  margin-top: var(--space-section);
+}
+
+.visual img {
+  object-position: 70% 50%;
+}
+
+.split__item img {
+  filter: var(--photo-tone);
+  transition: transform 1.6s var(--ease);
+}
+
+.visual>a:hover img,
+.split__item:hover img {
+  transform: scale(1.025);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 90vh;
+}
+
+.split__item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--color-placeholder);
+}
+
+.visual picture {
+  display: block;
+  height: 100%;
+}
+
+/* 캡션 — 부모가 position:relative면 어디든 재사용 */
+.caption {
+  position: absolute;
+  left: calc(var(--gap) * 2);
+  bottom: calc(var(--gap) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--color-bg);
+}
+
+/* 메인 문구: 가는 세리프, 대소문자 그대로 */
+.caption>span {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-shadow: 0 1px 24px rgba(42, 37, 34, .18);
+}
+
+/* 서브 문구: 이탤릭 한 줄 */
+.caption__sub {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 300;
+  opacity: .9;
+}
+
+.caption--right {
+  left: auto;
+  right: calc(var(--gap) * 2);
+  align-items: flex-end;
+  text-align: right;
+}
+
+.caption--center {
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  text-align: center;
+}
+
+.caption__more {
+  align-self: inherit;
+  margin-top: 14px;
+  padding-bottom: 3px;
+  font-size: var(--fs-xxs);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  opacity: .85;
+}
+
+.caption__more:hover {
+  opacity: .5;
+}
+
+.caption:not(.caption--right):not(.caption--center) .caption__more {
+  align-self: flex-start;
+}
+
+/* 밝은 사진 위 캡션 */
+.visual--light .caption {
+  color: var(--color-ink);
+}
+
+.visual--light .caption>span {
+  text-shadow: none;
+}
+
+/* =========================================
+   4-1. HERO SLIDER — 빛이 스미듯 바뀌는 3장
+   넘어가는 시간은 --hero-interval만 수정
+   ========================================= */
+.hero {
+  --hero-interval: 4s;
+  /* 한 장이 머무는 시간 */
+  --hero-fade: 1.6s;
+  /* 사진이 겹치며 바뀌는 시간 */
+}
+
+.hero__slides {
+  position: relative;
+  height: 100%;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--hero-fade) var(--ease), visibility 0s var(--hero-fade);
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+  transition: opacity var(--hero-fade) var(--ease);
+}
+
+.hero__slide>a,
+.hero__slide picture {
+  display: block;
+  height: 100%;
+}
+
+/* 머무는 동안 아주 천천히 다가오는 줌 */
+.hero .hero__slide img {
+  transform: scale(1.06);
+  transition: transform calc(var(--hero-interval) + var(--hero-fade)) linear;
+}
+
+.hero .hero__slide.is-active img {
+  transform: scale(1);
+}
+
+/* 캡션은 사진보다 살짝 늦게 떠오름 */
+.hero__slide .caption>* {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+
+.hero__slide.is-active .caption>* {
+  opacity: 1;
+  transform: none;
+  transition-delay: .6s;
+}
+
+.hero__slide.is-active .caption>*:nth-child(2) {
+  transition-delay: .75s;
+}
+
+.hero__slide.is-active .caption>*:nth-child(3) {
+  transition-delay: .9s;
+}
+
+/* 타임라인 */
+.hero__timeline {
+  position: absolute;
+  right: calc(var(--gap) * 2);
+  bottom: calc(var(--gap) * 2);
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  color: var(--color-ink);
+}
+
+.hero__bar {
+  width: 56px;
+  padding: 10px 0;
+  /* 클릭 영역은 넉넉하게, 선은 얇게 */
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.hero__bar::before,
+.hero__bar span {
+  content: '';
+  display: block;
+  height: 1px;
+  background: currentColor;
+}
+
+.hero__bar::before {
+  opacity: .3;
+}
+
+.hero__bar span {
+  margin-top: -1px;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+  .hero .hero__slide img {
+    transition: none;
+    transform: none;
+  }
+
+@media (max-width: 768px) {
+  .hero__timeline {
+    left: var(--gap);
+    right: var(--gap);
+    bottom: 12px;
+  }
+
+  .hero__bar {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* 어두운 사진: 캡션과 타임라인도 밝게 */
+.hero__slide[data-theme="dark"] .caption {
+  color: var(--color-bg);
+}
+.hero__slide[data-theme="dark"] .caption > span {
+  text-shadow: 0 1px 24px rgba(42, 37, 34, .25);
+}
+.hero__timeline {
+  transition: color var(--slow) var(--ease);
+}
+.hero.is-dark .hero__timeline {
+  color: var(--color-bg);
+}
+
+/* =========================================
+   5. COLLECTION / PRODUCT GRID
+   ========================================= */
+.collection {
+  background: var(--color-bg-soft);
+}
+
+.collection:has(.section-title) {
+  padding-top: var(--space-section);
+}
+
+.section-label {
+  text-align: center;
+  font-size: var(--fs-xxs);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-sub);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.section-desc {
+  text-align: center;
+  font-family: var(--font-ko);
+  font-size: var(--fs-body);
+  letter-spacing: -0.01em;
+  color: var(--color-sub);
+  margin: 14px 0 56px;
+}
+
+.divider {
+  width: 40px;
+  height: 1px;
+  margin: 0 auto;
+  background: var(--color-line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 56px var(--gap);
+  /* 세로 간격을 넉넉히 */
+  padding: 0 var(--gap) 100px;
+}
+
+.grid--col3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.grid--spaced {
+  padding-top: 72px;
+}
+
+/* =========================================
+   6. PRODUCT CARD
+   ========================================= */
+.card__thumb {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-placeholder);
+}
+
+.card__thumb img {
+  position: absolute;
+  inset: 0;
+  filter: var(--photo-tone);
+  transition: opacity var(--slow) var(--ease);
+}
+
+.card__thumb .is-hover {
+  opacity: 0;
+}
+
+.card:hover .card__thumb .is-hover {
+  opacity: 1;
+}
+
+.card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  padding: 4px 8px;
+  font-size: var(--fs-xxs);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: var(--color-bg);
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  font-size: var(--fs-s);
+  letter-spacing: 0.04em;
+}
+
+.card__price {
+  color: var(--color-sub);
+  white-space: nowrap;
+}
+
+/* 누끼 컷 상품: 흰 배경이 아이보리에 녹아들게 */
+.card--object .card__thumb {
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg);
+}
+
+.card--object .card__thumb img {
+  object-fit: contain;
+  padding: 12%;
+  mix-blend-mode: multiply;
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+.footer {
+  padding: 72px var(--gap) 36px;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-line);
+}
+
+.accordion {
+  max-width: 520px;
+}
+
+.accordion details {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary::after {
+  content: '+';
+  font-weight: 300;
+}
+
+.accordion details[open] summary::after {
+  content: '–';
+}
+
+.accordion__body {
+  padding-bottom: 20px;
+  font-family: var(--font-ko);
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  line-height: 2;
+  color: var(--color-sub);
+}
+
+.footer__copy {
+  margin-top: 48px;
+  font-size: var(--fs-xxs);
+  letter-spacing: 0.15em;
+  color: var(--color-sub);
+}
+
+/* =========================================
+   8. ANIMATION — 커튼 너머 빛처럼 천천히
+   ========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .visual img,
+  .split__item img {
+    transition: none;
+  }
+}
+
+/* =========================================
+   9. RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+  :root {
+    --space-section: 80px;
+    --fs-logo: 22px;
+    --header-h: 56px;
+  }
+
+  .header__nav a:not(:first-child) {
+    display: none;
+  }
+
+  .header__nav,
+  .header__util {
+    gap: 16px;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .split__item {
+    height: 80vh;
+  }
+
+  .caption {
+    left: var(--gap);
+    bottom: var(--gap);
+  }
+
+  .caption--right {
+    right: var(--gap);
+  }
+
+  .caption>span {
+    font-size: 28px;
+  }
+
+  .section-desc {
+    margin-bottom: 40px;
+  }
+
+  /* 모바일: 가로 스와이프 */
+  .grid,
+  .grid--col3 {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 42%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid>* {
+    scroll-snap-align: start;
+  }
+}
